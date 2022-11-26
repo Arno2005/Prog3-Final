@@ -4,6 +4,7 @@ grassEaterArr = [];
 predatorArr = [];
 omnivoreArr = [];
 spawnerArr = [];
+poacherArr = [];
 side = 20;
 matrixSize = 30;
 
@@ -16,12 +17,14 @@ let Grass = require('./Game/grass.js');
 let GrassEater = require('./Game/grassEater.js');
 let Omnivore = require('./Game/omnivore.js');
 let Predator = require('./Game/predator.js');
+let Poacher = require('./Game/poacher.js');
 let Spawner = require('./Game/spawner.js');
 
 let grassCount = 40;
 let grassEaterCount = 2;
 let predatorCount = 5;
 let omnivoreCount = 5;
+let poacherCount = 5;
 let spawnerCount = 1;
 
 //different counts, don't mess up!
@@ -32,14 +35,22 @@ var info = {
     'grassEaterCount': 0,
     'predatorCount': 0,
     'omnivoreCount': 0,
+    'poacherCount': 0,
     'spawnerCount': 0,
     'emptyCellCount' : 0,
 }
 
 
-function setup(){
+function start(){
 
-	function matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount, omnivoreCount, spawnerCount){
+	function matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount, omnivoreCount, spawnerCount, poacherCount){
+		matrix = [];
+		grassArr = [];
+		grassEaterArr = [];
+		predatorArr = [];
+		omnivoreArr = [];
+		spawnerArr = [];
+		poacherArr = [];
 
 		for (let i = 0; i < matrixSize; i++) {
     		matrix[i] = []  
@@ -75,7 +86,14 @@ function setup(){
 	        let y = Math.floor(random(matrixSize));
 	        matrix[y][x] = 4;
 	    }
+
 	    matrix[matrixSize - 1][matrixSize - 1] = 5;
+
+	    for (let i = 0; i < poacherCount; i++) {
+	        let x = Math.floor(random(matrixSize));
+	        let y = Math.floor(random(matrixSize));
+	        matrix[y][x] = 6;
+	    }
 	    // for (let i = 0; i < spawnerCount; i++) {
 	    //     let x = Math.floor(random(matrixSize));
 	    //     let y = Math.floor(random(matrixSize));
@@ -83,7 +101,7 @@ function setup(){
 	    // }
 	}
 
-	matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount, omnivoreCount, spawnerCount);
+	matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount, omnivoreCount, spawnerCount, poacherCount);
 
     for (let y = 0; y < matrix.length; y++) {
 	    for (let x = 0; x < matrix[y].length; x++) {
@@ -108,12 +126,16 @@ function setup(){
 	            var spw = new Spawner(x, y);
 	            spawnerArr.push(spw);
 	        }
+	        else if (matrix[y][x] == 6){
+	            var pch = new Poacher(x, y);
+	            poacherArr.push(pch);
+	        }
 	    }
 	}
 }
 
 
-setup();
+start();
 
 
 function game(){
@@ -134,17 +156,23 @@ function game(){
 		const omn = omnivoreArr[i];
 		omn.eat();
 	}
+	for (let i = 0; i < poacherArr.length; i++) {
+		const pch = poacherArr[i];
+		pch.eat();
+	}
 	for (let i in spawnerArr) {
 		spawnerArr[i].spawn();
 	}
 
 	emptyCellCount = 0;
+	let count = 0
 
 	for (let y = 0; y < matrix.length; y++) {
 		for (let x = 0; x < matrix[y].length; x++) { 
             if (matrix[y][x] == 0) {
             	emptyCellCount ++;
             }
+            count++;
 	    }
 	}
 
@@ -154,6 +182,7 @@ function game(){
 	info.predatorCount = predatorArr.length;
 	info.omnivoreCount = omnivoreArr.length;
 	info.spawnerCount = spawnerArr.length;
+	info.poacherCount = poacherArr.length;
 	info.emptyCellCount = emptyCellCount;
 
 
@@ -194,7 +223,5 @@ server.listen(port, function(){
 	console.log(`Port: ${port}`);
 
 });
-
-
 
 setInterval(game, frameRate);

@@ -8,64 +8,61 @@ function random (arr){
 };
 
 
-module.exports = class Omnivore extends LivingCreature{
+module.exports = class Poacher extends LivingCreature{
     mul() {
         let found = this.chooseCell(0);
         let exact = random(found)
 
-        if (exact && this.energy > 15) {
+        if (exact && this.energy > 8) {
             let x = exact[0];
             let y = exact[1];
+            let pch = new Poacher(x, y);
+            matrix[y][x] = 6;
+            poacherArr.push(pch);
 
-            let omn = new Omnivore(x, y);
-            matrix[y][x] = 4;
-            omnivoreArr.push(omn);
-
-
-            this.energy = 10;
+            this.energy = 20;
         } 
     }
     eat(){
-        let found = this.chooseCell(2);
-        let grass = this.chooseCell(1);
-        
-        let exact = random(found);
-        let grassExact = random(grass);
+        let gre = this.chooseCell(2);
+        let pred = this.chooseCell(3);
 
-        if (exact){
+        let exactEater = random(gre);
+        let exactPr = random(pred);
+
+        if (exactEater){
             this.energy +=5;
-            let x = exact[0];
-            let y = exact[1];
-            
+            let x = exactEater[0];
+            let y = exactEater[1];
+
             for (let i = 0; i < grassEaterArr.length; i++) {
                 if( grassEaterArr[i].x == x && grassEaterArr[i].y == y ){
                     grassEaterArr.splice(i, 1)
                 }
             }
-           
 
-            matrix[y][x] = 4;
-            matrix[this.y][this.x] = 0;
+            matrix[y][x] = 6
+            matrix[this.y][this.x] = 0
             
             this.x = x;
             this.y = y
 
-            if(this.energy > 30){
+            if(this.energy > 40){
                 this.mul()
             }
         }
-        else if(grassExact){ 
+        if (exactPr){
             this.energy +=5;
-            let x = grassExact[0];
-            let y = grassExact[1];
+            let x = exactPr[0];
+            let y = exactPr[1];
 
-            for (let i = 0; i < grassArr.length; i++) {
-                if( grassArr[i].x == x && grassArr[i].y == y ){
-                    grassArr.splice(i, 1)
+            for (let i = 0; i < predatorArr.length; i++) {
+                if( predatorArr[i].x == x && predatorArr[i].y == y ){
+                    predatorArr.splice(i, 1)
                 }
             }
 
-            matrix[y][x] = 4
+            matrix[y][x] = 6
             matrix[this.y][this.x] = 0
             
             this.x = x;
@@ -74,9 +71,7 @@ module.exports = class Omnivore extends LivingCreature{
             if(this.energy > 30){
                 this.mul()
             }
-
-        }
-        else {
+        }else {
             this.move()
         }
     }
@@ -88,7 +83,7 @@ module.exports = class Omnivore extends LivingCreature{
             let x = exact[0];
             let y = exact[1];
 
-            matrix[y][x] = 4
+            matrix[y][x] = 6
             matrix[this.y][this.x] = 0
 
             this.x = x;
@@ -107,9 +102,9 @@ module.exports = class Omnivore extends LivingCreature{
         }
     }
     die(){
-        for (let i = 0; i < omnivoreArr.length; i++) {
-            if( omnivoreArr[i].x == this.x && omnivoreArr[i].y == this.y ){
-                omnivoreArr.splice(i, 1)
+        for (let i = 0; i < poacherArr.length; i++) {
+            if( poacherArr[i].x == this.x && poacherArr[i].y == this.y ){
+                poacherArr.splice(i, 1)
             }
         }
         matrix[this.y][this.x] = 0

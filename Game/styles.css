@@ -17,7 +17,7 @@ h2{
 	font-size: 40px;
 }
 
-.grCol, .geCol, .prCol, .omCol, .spCol, .ecCol{
+.grCol, .geCol, .prCol, .omCol, .pchCol, .spCol, .ecCol{
 	width: 30px;
 	height: 30px;
 	margin: 0 auto;
@@ -41,6 +41,10 @@ h2{
 }
 .spCol{
 	background: orange;
+
+}
+.pchCol{
+	background: purple;
 
 }
 .ecCol{

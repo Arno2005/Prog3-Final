@@ -63,7 +63,7 @@ module.exports = class Predator extends LivingCreature{
                 }
             }
 
-            matrix[y][x] = 4
+            matrix[y][x] = 3
             matrix[this.y][this.x] = 0
             
             this.x = x;
