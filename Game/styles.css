@@ -1,0 +1,22 @@
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.stats{
+	margin-top: 20px;
+	text-align: center;
+}
+
+h1{
+	font-size: 3em;
+}
+h2{
+	font-size: 40px;
+}
+
+canvas{
+	display: block;
+	margin: 0 auto;
+}

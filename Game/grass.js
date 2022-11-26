@@ -1,8 +1,17 @@
-class Grass extends LivingCreature{
+var LivingCreature = require('./living');
+
+function random (arr){
+
+    return arr[Math.floor(Math.random()*arr.length)];
+
+};
+
+module.exports = class Grass extends LivingCreature{
+
     mul() {
         this.energy++;
         let found = this.chooseCell(0);
-        let exact = random(found)
+        let exact = random(found);
 
         if (exact && this.energy > 8) {
             let x = exact[0];

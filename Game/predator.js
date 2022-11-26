@@ -1,4 +1,14 @@
-class Predator extends LivingCreature{
+var LivingCreature = require('./living');
+
+
+function random (arr){
+
+    return arr[Math.floor(Math.random()*arr.length)];
+
+};
+
+
+module.exports = class Predator extends LivingCreature{
     mul() {
         let found = this.chooseCell(0);
         let exact = random(found)

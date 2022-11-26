@@ -1,5 +1,5 @@
 //Parent Class
-class LivingCreature{
+module.exports = class LivingCreature{
 	constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -16,7 +16,7 @@ class LivingCreature{
         ];
     }
     getNewCordinates(){
-              this.directions = [
+        this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
@@ -28,7 +28,7 @@ class LivingCreature{
         ];
     }
     chooseCell(char) {
-      this.getNewCordinates();
+        this.getNewCordinates();
         let result = [];
 
         for (let i = 0; i < this.directions.length; i++) {
