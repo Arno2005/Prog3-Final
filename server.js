@@ -25,7 +25,7 @@ let omnivoreCount = 5;
 let spawnerCount = 1;
 
 //different counts, don't mess up!
-
+var emptyCellCount = 0;
 var info = {
     "matrix": 0,
     'grassCount': 0,
@@ -33,6 +33,7 @@ var info = {
     'predatorCount': 0,
     'omnivoreCount': 0,
     'spawnerCount': 0,
+    'emptyCellCount' : 0,
 }
 
 
@@ -74,11 +75,12 @@ function setup(){
 	        let y = Math.floor(random(matrixSize));
 	        matrix[y][x] = 4;
 	    }
-	    for (let i = 0; i < spawnerCount; i++) {
-	        let x = Math.floor(random(matrixSize));
-	        let y = Math.floor(random(matrixSize));
-	        matrix[y][x] = 5;
-	    }
+	    matrix[matrixSize - 1][matrixSize - 1] = 5;
+	    // for (let i = 0; i < spawnerCount; i++) {
+	    //     let x = Math.floor(random(matrixSize));
+	    //     let y = Math.floor(random(matrixSize));
+	    //     matrix[y][x] = 5;
+	    // }
 	}
 
 	matrixGenerator(matrixSize, grassCount, grassEaterCount, predatorCount, omnivoreCount, spawnerCount);
@@ -136,12 +138,23 @@ function game(){
 		spawnerArr[i].spawn();
 	}
 
+	emptyCellCount = 0;
+
+	for (let y = 0; y < matrix.length; y++) {
+		for (let x = 0; x < matrix[y].length; x++) { 
+            if (matrix[y][x] == 0) {
+            	emptyCellCount ++;
+            }
+	    }
+	}
+
 	info.matrix = matrix;
 	info.grassCount = grassArr.length;
 	info.grassEaterCount = grassEaterArr.length;
 	info.predatorCount = predatorArr.length;
 	info.omnivoreCount = omnivoreArr.length;
 	info.spawnerCount = spawnerArr.length;
+	info.emptyCellCount = emptyCellCount;
 
 
 	io.sockets.emit("send info", info);

@@ -6,6 +6,7 @@ body{
 
 .stats{
 	margin-top: 20px;
+	margin-bottom: 50px;
 	text-align: center;
 }
 
@@ -15,6 +16,38 @@ h1{
 h2{
 	font-size: 40px;
 }
+
+.grCol, .geCol, .prCol, .omCol, .spCol, .ecCol{
+	width: 30px;
+	height: 30px;
+	margin: 0 auto;
+}
+
+.grCol{
+	background: green;
+
+}
+.geCol{
+	background: yellow;
+
+}
+.prCol{
+	background: red;
+
+}
+.omCol{
+	background: blue;
+
+}
+.spCol{
+	background: orange;
+
+}
+.ecCol{
+	background: #acacac;
+}
+
+
 
 canvas{
 	display: block;

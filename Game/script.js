@@ -40,4 +40,11 @@ function draw(info) {
         }
     }
 
+    document.querySelector('.grassCount').innerHTML = info.grassCount;
+    document.querySelector('.grassEaterCount').innerHTML = info.grassEaterCount;
+    document.querySelector('.predatorCount').innerHTML = info.predatorCount;
+    document.querySelector('.omnivoreCount').innerHTML = info.omnivoreCount;
+    document.querySelector('.spawnerCount').innerHTML = info.spawnerCount;
+    document.querySelector('.emptyCellCount').innerHTML = info.emptyCellCount;
+
 }

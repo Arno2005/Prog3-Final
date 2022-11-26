@@ -3,6 +3,7 @@
 <head>
 	<title>Game Of Life</title>
 	<meta charset="utf8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link rel = 'stylesheet' href = 'styles.css'>
 </head>
 <body>
@@ -11,6 +12,70 @@
 		<h1> Game Of Life </h1>
 		<h2> Statistics </h2>
 
+		<table class="table container">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Species' Name</th>
+		      <th scope="col">Color</th>
+		      <th scope="col">Description</th>
+		      <th scope="col">Quantity</th>
+		    </tr>
+
+		  </thead>
+
+		  <tbody>
+		    <tr>
+		      <th scope="row">1</th>
+		      <td>Grass</td>
+		      <td> <div class="grCol"></div> </td>
+		      <td>Grass can Only Multiply</td>
+		      <td class="grassCount"></td>
+		    </tr>
+
+		    <tr>
+		      <th scope="row">2</th>
+		      <td>Grass Eater</td>
+		      <td> <div class="geCol"></div> </td>
+		      <td>Grass Eater Eats Only Grass</td>
+		      <td class="grassEaterCount"></td>
+		    </tr>
+
+		    <tr>
+		      <th scope="row">3</th>
+		      <td>Predator</td>
+		      <td> <div class="prCol"></div> </td>
+		      <td>Predator Haunts Only Grass Eaters</td>
+		      <td class="predatorCount"></td>
+		    </tr>
+
+		    <tr>
+		      <th scope="row">3</th>
+		      <td>Omnivore</td>
+		      <td> <div class="omCol"></div> </td>
+		      <td>Omnivore Eats Everything Expect The Predators</td>
+		      <td class="omnivoreCount"></td>
+		    </tr>
+
+		    <tr>
+		      <th scope="row">3</th>
+		      <td>Spawner</td>
+		      <td> <div class="spCol"></div> </td>
+		      <td>Spawner Is Always Alone And Helps To Balance The Game By Creating Every Extinct Species. He Can't Move Or Be Kiled</td>
+		      <td class="spawnerCount"></td>
+		  	</tr>
+
+		    <tr>
+		      <th scope="row">4</th>
+		      <td>Empty Cells</td>
+		      <td> <div class="ecCol"></div> </td>
+		      <td>Those Are Empty Cells to Where Every Creature Can Move</td>
+		      <td class="emptyCellCount"></td>
+		    </tr>
+
+		  </tbody>
+		</table>
+
 	</div>
 
 
@@ -18,6 +83,9 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script src="script.js"></script>
+
+	<!-- bootstrap -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
 </body>
 </html>
