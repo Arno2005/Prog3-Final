@@ -55,7 +55,7 @@ h2{
 
 canvas{
 	display: block;
-	margin: 35px auto;
+	margin: 0 auto 35px auto;
 }
 
 .btn-outline-purple{

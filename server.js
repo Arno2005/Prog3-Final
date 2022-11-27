@@ -5,6 +5,8 @@ predatorArr = [];
 omnivoreArr = [];
 spawnerArr = [];
 poacherArr = [];
+days = 0;
+
 side = 20;
 matrixSize = 30;
 
@@ -29,7 +31,7 @@ let spawnerCount = 1;
 
 //different counts, don't mess up!
 var emptyCellCount = 0;
-var info = {
+info = {
     "matrix": 0,
     'grassCount': 0,
     'grassEaterCount': 0,
@@ -38,6 +40,7 @@ var info = {
     'poacherCount': 0,
     'spawnerCount': 0,
     'emptyCellCount' : 0,
+    'season': 'Spring'
 }
 
 
@@ -82,6 +85,7 @@ function start(){
 		omnivoreArr = [];
 		spawnerArr = [];
 		poacherArr = [];
+		days = 0;
 
 		for (let i = 0; i < matrixSize; i++) {
     		matrix[i] = []  
@@ -171,6 +175,8 @@ start();
 
 function game(){
 
+	++days;
+
 	for (let i = 0; i < grassArr.length; i++) {
 		const grass = grassArr[i];
 		grass.mul();
@@ -214,6 +220,22 @@ function game(){
 	info.poacherCount = poacherArr.length;
 	info.emptyCellCount = emptyCellCount;
 
+	if(days <= 91){
+		info.season = 'Spring';
+	}
+	else if(days > 92 && days <= 182){
+		info.season = 'Summer';
+	}
+	else if(days > 182 && days <= 273){
+		info.season = 'Autumn';
+	}
+	else if(days > 273 && days <= 364){
+		info.season = 'Winter';
+	}else if(days > 364){
+		days = 0;
+		info.season = 'Spring';
+	}
+
 
 	io.sockets.emit("send info", info);
 
@@ -244,12 +266,12 @@ function kill(ch){
     }
 }
 
+
 io.on('connection', function (socket) {
 
 	socket.on("clear grass", kill);
 	socket.on("restart game", start);
 	
-
 });
 
 

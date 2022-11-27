@@ -24,20 +24,20 @@ module.exports = class Poacher extends LivingCreature{
         } 
     }
     eat(){
-        let gre = this.chooseCell(2);
         let pred = this.chooseCell(3);
+        let omn = this.chooseCell(4);
 
-        let exactEater = random(gre);
         let exactPr = random(pred);
+        let exactOmn = random(omn);
 
-        if (exactEater){
+        if (exactOmn){
             this.energy +=5;
-            let x = exactEater[0];
-            let y = exactEater[1];
+            let x = exactOmn[0];
+            let y = exactOmn[1];
 
-            for (let i = 0; i < grassEaterArr.length; i++) {
-                if( grassEaterArr[i].x == x && grassEaterArr[i].y == y ){
-                    grassEaterArr.splice(i, 1)
+            for (let i = 0; i < omnivoreArr.length; i++) {
+                if( omnivoreArr[i].x == x && omnivoreArr[i].y == y ){
+                    omnivoreArr.splice(i, 1)
                 }
             }
 

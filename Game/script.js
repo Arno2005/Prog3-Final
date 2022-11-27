@@ -19,7 +19,15 @@ function draw(info) {
         for (var x = 0; x < info.matrix[y].length; x++) {
 
             if (info.matrix[y][x] == 1) {
-                fill("green");
+                if (info.season == 'Spring') {
+                    fill("#40f23d");
+                }else if (info.season == 'Autumn') {
+                    fill("#e38e39");
+                }else if (info.season == 'Winter') {
+                    fill("#fff");
+                }else{
+                    fill("green");
+                }
             }
             else if (info.matrix[y][x] == 0) {
                 fill("#acacac");
@@ -52,6 +60,8 @@ function draw(info) {
     document.querySelector('.spawnerCount').innerHTML = info.spawnerCount;
     document.querySelector('.emptyCellCount').innerHTML = info.emptyCellCount;
 
+
+    document.querySelector('.season').innerHTML = `Current Season: ${info.season}`;
 }
 
 function sendClear(ch){

@@ -57,7 +57,7 @@ module.exports = class Spawner extends LivingCreature{
             }
         }
         if(omnivoreArr.length == 0){
-            for (let i = 0; i <= 1; i++) {
+            for (let i = 0; i <= 5; i++) {
 
                 
 
@@ -85,5 +85,4 @@ module.exports = class Spawner extends LivingCreature{
             }
         }
     }
-
 }
