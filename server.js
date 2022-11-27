@@ -9,7 +9,7 @@ side = 20;
 matrixSize = 30;
 
 
-var frameRate = 100;
+var frameRate = 60;
 
 
 let LivingCreature = require('./Game/living.js');
@@ -21,10 +21,10 @@ let Poacher = require('./Game/poacher.js');
 let Spawner = require('./Game/spawner.js');
 
 let grassCount = 40;
-let grassEaterCount = 2;
+let grassEaterCount = 7;
 let predatorCount = 5;
-let omnivoreCount = 5;
-let poacherCount = 5;
+let omnivoreCount = 4;
+let poacherCount = 3;
 let spawnerCount = 1;
 
 //different counts, don't mess up!
@@ -39,6 +39,37 @@ var info = {
     'spawnerCount': 0,
     'emptyCellCount' : 0,
 }
+
+
+
+
+var express = require('express');
+
+var app = express();
+
+var server = require('http').createServer(app);
+
+var io = require('socket.io')(server);
+
+var port = 3000;
+
+app.use(express.static("Game"));
+
+app.get('/', function (req, res) {
+
+	res.redirect('index.html');
+
+});
+
+server.listen(port, function(){
+
+	console.log(`Port: ${port}`);
+
+});
+
+
+
+
 
 
 function start(){
@@ -165,14 +196,12 @@ function game(){
 	}
 
 	emptyCellCount = 0;
-	let count = 0
 
 	for (let y = 0; y < matrix.length; y++) {
 		for (let x = 0; x < matrix[y].length; x++) { 
             if (matrix[y][x] == 0) {
             	emptyCellCount ++;
             }
-            count++;
 	    }
 	}
 
@@ -190,6 +219,41 @@ function game(){
 
 }
 
+function kill(ch){
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) { 
+            if (matrix[y][x] == ch) {
+                matrix[y][x] = 0;
+            }
+        }
+    }
+    if (ch == 1) {
+        grassArr = [];
+    }
+    else if (ch == 2) {
+        grassEaterArr = [];
+    }
+    else if (ch == 3) {
+        predatorArr = [];
+    }
+    else if (ch == 4) {
+        omnivoreArr = [];
+    }
+    else if (ch == 6) {
+        poacherArr = [];
+    }
+}
+
+io.on('connection', function (socket) {
+
+	socket.on("clear grass", kill);
+	socket.on("restart game", start);
+	
+
+});
+
+
+
 
 function random(max) {
   return Math.floor(Math.random() * max);
@@ -200,28 +264,6 @@ function randomArr (arr){
 }
 
 
-var express = require('express');
 
-var app = express();
-
-var server = require('http').createServer(app);
-
-var io = require('socket.io')(server);
-
-var port = 3000;
-
-app.use(express.static("Game"));
-
-app.get('/', function (req, res) {
-
-	res.redirect('index.html');
-
-});
-
-server.listen(port, function(){
-
-	console.log(`Port: ${port}`);
-
-});
 
 setInterval(game, frameRate);

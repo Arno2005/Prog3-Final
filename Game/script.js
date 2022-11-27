@@ -54,28 +54,10 @@ function draw(info) {
 
 }
 
-// function kill(ch){
-//     for (let y = 0; y < matrix.length; y++) {
-//         for (let x = 0; x < matrix[y].length; x++) { 
-//             if (matrix[y][x] == ch) {
-//                 matrix[y][x] == 0;
-//             }
-//         }
-//     }
-//     if (ch == 1) {
-//         grassArr = [];
-//     }
-//     else if (ch == 2) {
-//         grassEaterArr = [];
-//     }
-//     else if (ch == 3) {
-//         predatorArr = [];
-//     }
-//     else if (ch == 4) {
-//         omnivoreArr = [];
-//     }
-//     else if (ch == 6) {
-//         poacherArr = [];
-//     }
-//     console.log(grassArr);
-// }
+function sendClear(ch){
+    socket.emit('clear grass', ch);
+}
+
+function restart(){
+    socket.emit('restart game', 0);
+}

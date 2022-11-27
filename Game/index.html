@@ -49,7 +49,7 @@
 		      <th scope="row">3</th>
 		      <td>Predator</td>
 		      <td> <div class="prCol"></div> </td>
-		      <td>Predator Haunts Only Grass Eaters</td>
+		      <td>Predator Haunts Grass Eaters And Omnivores</td>
 		      <td class="predatorCount"></td>
 		    </tr>
 
@@ -88,9 +88,26 @@
 		  </tbody>
 		</table>
 
-		<!-- <div class="functions">
-			<button class="btn btn-primary" onclick="kill(1)">Link</button>
-		</div> -->
+		<div class="functions">
+			<h2 class="mb-3">Interactions</h2>
+			<div class="res mb-2">
+				<button class="btn btn-outline-dark" onclick="restart()">Restart</button>
+			</div>
+			<div class="upper mb-2">
+				<button class="btn btn-outline-success" onclick="sendClear(1)">Clear Grass</button>
+
+				<button class="btn btn-outline-warning" onclick="sendClear(2)">Kill Grass Eaters</button>
+
+				<button class="btn btn-outline-danger" onclick="sendClear(3)">Kill Predators</button>
+			</div>
+			
+			<div class="lower">
+				<button class="btn btn-outline-primary" onclick="sendClear(4)">Kill Omnivores</button>
+
+				<button class="btn btn-outline-purple" onclick="sendClear(6)">Kill Poachers</button>
+			</div>
+			
+		</div>
 
 	</div>
 

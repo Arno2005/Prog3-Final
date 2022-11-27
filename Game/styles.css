@@ -55,5 +55,15 @@ h2{
 
 canvas{
 	display: block;
-	margin: 0 auto;
+	margin: 35px auto;
+}
+
+.btn-outline-purple{
+	border-color: purple !important;
+	color: purple !important;
+}
+
+.btn-outline-purple:hover{
+	background: purple;
+	color: #fff!important;
 }
